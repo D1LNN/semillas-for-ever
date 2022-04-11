@@ -11,9 +11,15 @@ class Menta(altura: Double, anioSemilla: Int): Planta(altura, anioSemilla) {
 class Soja(altura: Double, anioSemilla: Int): Planta(altura, anioSemilla) {
     override fun horasDeSolTolera(): Int = if (altura < 0.5) 6 else if (altura < 1.0) 8 else 12
 
-    override fun condicionAlternativa() = anioSemilla < 2007 && 0.75 <= altura && altura >= 0.9
+    override fun condicionAlternativa() = anioSemilla < 2007 && altura in 0.75..0.9     // 0.75 <= altura && altura <= 0.9
 
     override fun espacio(): Double = altura / 2
+}
+
+class Quinoa(var espacio: Double, altura: Double, anioSemilla: Int): Planta(altura, anioSemilla) {
+    override fun horasDeSolTolera(): Int = if (espacio < 0.3) 10 else super.horasDeSolTolera()
+
+    override fun condicionAlternativa(): Boolean = anioSemilla in 2001..2008
 }
 
 open class Planta(var altura: Double, val anioSemilla: Int) {
