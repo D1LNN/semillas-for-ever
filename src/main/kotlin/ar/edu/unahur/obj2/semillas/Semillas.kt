@@ -1,14 +1,13 @@
 package ar.edu.unahur.obj2.semillas
 
-class Menta(altura: Double, anioSemilla: Int): Planta(altura, anioSemilla) {
+open class Menta(altura: Double, anioSemilla: Int): Planta(altura, anioSemilla) {
 
     override fun condicionAlternativa() = altura > 0.4
 
     override fun espacio(): Double = altura + 1.0
-
 }
 
-class Soja(altura: Double, anioSemilla: Int): Planta(altura, anioSemilla) {
+open class Soja(altura: Double, anioSemilla: Int): Planta(altura, anioSemilla) {
     override fun horasDeSolTolera(): Int = if (altura < 0.5) 6 else if (altura < 1.0) 8 else 12
 
     override fun condicionAlternativa() = anioSemilla < 2007 && altura in 0.75..0.9     // 0.75 <= altura && altura <= 0.9
@@ -19,7 +18,15 @@ class Soja(altura: Double, anioSemilla: Int): Planta(altura, anioSemilla) {
 class Quinoa(var espacio: Double, altura: Double, anioSemilla: Int): Planta(altura, anioSemilla) {
     override fun horasDeSolTolera(): Int = if (espacio < 0.3) 10 else super.horasDeSolTolera()
 
-    override fun condicionAlternativa(): Boolean = anioSemilla in 2001..2008
+    override fun condicionAlternativa(): Boolean = anioSemilla in 2001..2008    // 2001 <= altura && altura <= 2009
+}
+
+class SojaTransgenica(altura: Double, anioSemilla: Int): Soja(altura, anioSemilla) {
+    override fun daSemillas(): Boolean = false
+}
+
+class Peperina(altura: Double, anioSemilla: Int): Menta(altura, anioSemilla) {
+    override fun espacio(): Double = super.espacio() * 2
 }
 
 open class Planta(var altura: Double, val anioSemilla: Int) {
@@ -33,7 +40,7 @@ open class Planta(var altura: Double, val anioSemilla: Int) {
 
     open fun espacio(): Double = 0.0
 
-    fun daSemillas() = esFuerte() || condicionAlternativa()
+    open fun daSemillas() = esFuerte() || condicionAlternativa()
 
     open fun condicionAlternativa(): Boolean = false
 }
