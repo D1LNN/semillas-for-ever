@@ -4,6 +4,7 @@ import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.booleans.shouldBeFalse
 import io.kotest.matchers.booleans.shouldBeTrue
 import io.kotest.matchers.shouldBe
+import kotlin.math.ceil
 
 class SemillasTest : DescribeSpec ({
     // hay una clase Planta que tiene por atributos
@@ -41,7 +42,12 @@ class SemillasTest : DescribeSpec ({
                 menta.espacio(),
                 mentita.espacio()
             ).sum()
-            Math.ceil(superficie).shouldBe(4)
+            ceil(superficie).shouldBe(4)   //Math.ceil(num) redondea el numero dado
+        }
+
+        it ("Verifico las horas de sol toleradas") {
+            menta.horasDeSolTolera().shouldBe(7)
+            soja.horasDeSolTolera().shouldBe(8)
         }
     }
 })
