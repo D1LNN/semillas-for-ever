@@ -60,4 +60,35 @@ class SemillasTest : DescribeSpec ({
             quinoa2.horasDeSolTolera().shouldBe(7)
         }
     }
+
+    describe("Parcelas") {
+        val parcela1 = Parcela(20.0, 1.0,10)
+
+        val soja2 = Soja(2.0, 2009)
+        val soja3 = Soja(1.5, 2009)
+        val soja4 = Soja(2.1, 2009)
+        val soja5 = Soja(1.1, 2009)
+        val soja6 = Soja(1.1, 2009)
+
+        it("probamos los atributos") {
+            parcela1.ancho.shouldBe(20.0)
+            parcela1.largo.shouldBe(1.0)
+            parcela1.horasDeSol.shouldBe(10)
+        }
+
+        it("Superficie") { parcela1.superficie().shouldBe(20.0) }
+
+        it("Maximo de plantas") { parcela1.cantidadDePlantasQueTolera().shouldBe(4) }
+
+        it ("Plnatamos planta en parcela") {
+            parcela1.plantar(soja2)
+            parcela1.plantar(soja3)
+            parcela1.plantar(soja4)
+            parcela1.plantar(soja5)
+        }
+
+        it ("Parcela tiene complicaciones") {
+            parcela1.tieneComplicaciones().shouldBeFalse()
+        }
+    }
 })
