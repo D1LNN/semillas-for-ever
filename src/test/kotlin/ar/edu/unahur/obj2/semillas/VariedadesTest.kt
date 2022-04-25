@@ -7,10 +7,12 @@ import io.kotest.matchers.shouldBe
 class VariedadesTest: DescribeSpec( {
     val sojaTransgenica = SojaTransgenica(0.6, 2009)
     val peperina = Peperina(1.0, 2000)
-    describe("Creación de las plantas") {
+
+    describe("SojaTransgenica no da semillas") {
         sojaTransgenica.daSemillas().shouldBeFalse()
     }
-    describe("peperina") {
+
+    describe("Peperina") {
         peperina.espacio().shouldBe(4.0)
     }
 })

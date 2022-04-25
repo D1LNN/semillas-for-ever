@@ -21,14 +21,6 @@ class Quinoa(var espacio: Double, altura: Double, anioSemilla: Int): Planta(altu
     override fun condicionAlternativa(): Boolean = anioSemilla in 2001..2008    // 2001 <= altura && altura <= 2009
 }
 
-class SojaTransgenica(altura: Double, anioSemilla: Int): Soja(altura, anioSemilla) {
-    override fun daSemillas(): Boolean = false
-}
-
-class Peperina(altura: Double, anioSemilla: Int): Menta(altura, anioSemilla) {
-    override fun espacio(): Double = super.espacio() * 2
-}
-
 open class Planta(var altura: Double, val anioSemilla: Int) {
     object Constates {      // Companion Objects
         val umbralDeHorasDeSol = 9
