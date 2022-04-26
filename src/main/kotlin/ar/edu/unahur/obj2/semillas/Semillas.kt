@@ -5,7 +5,7 @@ open class Menta(altura: Double, anioSemilla: Int): Planta(altura, anioSemilla) 
     override fun condicionAlternativa() = altura > 0.4
 
     override fun espacio(): Double = altura + 1.0
-    fun esIdeal(parcela: Parcela)=parcela.superficie()>6
+    override fun esIdeal(parcela: Parcela) = parcela.superficie() > 6
 }
 
 open class Soja(altura: Double, anioSemilla: Int): Planta(altura, anioSemilla) {
@@ -15,7 +15,7 @@ open class Soja(altura: Double, anioSemilla: Int): Planta(altura, anioSemilla) {
 
     override fun espacio(): Double = altura / 2
 
-    open fun esIdeal(parcela: Parcela)= horasDeSolTolera()==parcela.horasDeSol
+    override fun esIdeal(parcela: Parcela) = horasDeSolTolera() == parcela.horasDeSol
 
     }
 
@@ -23,7 +23,7 @@ class Quinoa(var espacio: Double, altura: Double, anioSemilla: Int): Planta(altu
     override fun horasDeSolTolera(): Int = if (espacio < 0.3) 10 else super.horasDeSolTolera()
 
     override fun condicionAlternativa(): Boolean = anioSemilla in 2001..2008    // 2001 <= altura && altura <= 2009
-    fun esIdeal(parcela: Parcela)=!parcela.tienePlantasMayoresA(1.5)
+    override fun esIdeal(parcela: Parcela)=!parcela.tienePlantasMayoresA(1.5)
     }
 
 open class Planta(var altura: Double, val anioSemilla: Int) {
@@ -33,11 +33,13 @@ open class Planta(var altura: Double, val anioSemilla: Int) {
 
     open fun horasDeSolTolera(): Int = 7
 
-    fun esFuerte() = horasDeSolTolera() > Planta.Constates.umbralDeHorasDeSol
+    fun esFuerte() = horasDeSolTolera() > Constates.umbralDeHorasDeSol
 
     open fun espacio(): Double = 0.0
 
     open fun daSemillas() = esFuerte() || condicionAlternativa()
 
     open fun condicionAlternativa(): Boolean = false
+
+    open fun esIdeal(parcela: Parcela): Boolean = true
 }
