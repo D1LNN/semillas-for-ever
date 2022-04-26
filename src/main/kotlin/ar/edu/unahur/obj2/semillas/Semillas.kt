@@ -23,7 +23,7 @@ class Quinoa(var espacio: Double, altura: Double, anioSemilla: Int): Planta(altu
     override fun horasDeSolTolera(): Int = if (espacio < 0.3) 10 else super.horasDeSolTolera()
 
     override fun condicionAlternativa(): Boolean = anioSemilla in 2001..2008    // 2001 <= altura && altura <= 2009
-    override fun esIdeal(parcela: Parcela)=!parcela.tienePlantasMayoresA(1.5)
+    override fun esIdeal(parcela: Parcela) = !parcela.tienePlantasMayoresA(1.5)
     }
 
 open class Planta(var altura: Double, val anioSemilla: Int) {

@@ -20,16 +20,25 @@ open class Parcela(var ancho: Double, var largo: Double, var horasDeSol: Int) {
         }
     }
 
+    open fun seAsociaBien(planta: Planta) = true
+
     fun tienePlantasMayoresA(medida: Double)=plantasQueTiene.any { p:Planta -> p.altura > medida}
+
+    fun porcentajeDeBienAsociadas(): Double = if (plantasQueTiene.size > 0) {
+        ((plantasQueTiene.count { p: Planta -> seAsociaBien(p) }) * 100).toDouble() / plantasQueTiene.size.toDouble()
+    }
+    else {
+        0.0
+    }
 
 }
 
 class ParcelaEcologica(ancho: Double, largo: Double, horasDeSol: Int): Parcela(ancho, largo, horasDeSol) {
-    fun seAsociaBien(planta: Planta) = ! tieneComplicaciones() && planta.esIdeal(this)
+    override fun seAsociaBien(planta: Planta) = ! tieneComplicaciones() && planta.esIdeal(this)
 
 }
 
 class ParcelaIndustrial(ancho: Double, largo: Double, horasDeSol: Int): Parcela(ancho, largo, horasDeSol) {
-    fun seAsociaBien(planta: Planta) = plantasQueTiene.size <= 2 && planta.esFuerte()
+    override fun seAsociaBien(planta: Planta) = plantasQueTiene.size <= 2 && planta.esFuerte()
 
 }
